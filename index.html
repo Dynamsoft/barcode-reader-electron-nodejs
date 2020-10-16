@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+    <title>DBR-electron</title>
+    <link rel="stylesheet" href="index.css"></link>
+    <script src="index.js" defer></script>
+  </head>
+  <body>
+    <div id="app">
+      <input id="file-selector" type="file">
+      <button id="file-select-btn" class="btn-primary">Open File</button>
+      <button id="video-capture-btn" class="btn-secondary">Capture</button>
+      <div id="video-container"></div>
+      <div id="result-box">
+      </div>
+      <div id="env-box">
+        We are using Node.js <span id="node-version"></span>,
+        Chromium <span id="chrome-version"></span>,
+        and Electron <span id="electron-version"></span>.
+      </div>
+    </div>
+
+    <!-- You can also require other files to run in this process -->
+    <script src="./renderer.js"></script>
+  </body>
+</html>

@@ -1,0 +1,78 @@
+/* global element */
+html {
+  font-size: 14px;
+  font-family: 'SF Pro Display', Arial, Helvetica, sans-serif;
+}
+h1 {
+  font-size: 2.4rem;
+}
+h2 {
+  font-size: 2.2rem;
+}
+h3 {
+  font-size: 1.8rem;
+}
+h4 {
+  font-size: 1.6rem;
+}
+h5 {
+  font-size: 1.4rem;
+}
+h6 {
+  font-size: 1.2rem;
+}
+p {
+  font-size: 1.2rem;
+}
+button {
+  padding: 0.8rem 1rem;
+  min-width: 4.8rem;
+  border-color: transparent;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 4px;
+}
+
+body {
+  background-color: rgb(232, 233, 235);
+}
+
+#app {
+  margin: 1rem auto;
+  padding: 2rem 1rem;
+  overflow: hidden;
+}
+#file-selector {
+  width: 0px;
+  height: 0px;
+  display: hidden;
+}
+
+.btn-primary {
+  background-color: #237bce;
+  color: white;
+}
+.btn-primary:hover {
+  cursor: pointer;
+}
+.btn-primary:active {
+  background-color: #13497c;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+.btn-secondary {
+  background-color: rgb(160, 160, 160);
+}
+
+.result-card {
+  padding: 1.5rem 1.2rem;
+  min-width: 200px;
+  max-width: 400px;
+  min-height: 100px;
+  max-height: 150px;
+  box-sizing: border-box;
+  box-shadow: 2px 2px 8px 0px rgba(128, 128, 128, .5);
+  background-color: white;
+  border-radius: 8px;
+  margin-top: 1rem; /* temp */
+}
