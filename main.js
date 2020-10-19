@@ -9,7 +9,7 @@ function createWindow () {
     height: 1024,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
-      nodeIntegration: true
+      nodeIntegration: true // Change to true to use Node API
     }
   })
 

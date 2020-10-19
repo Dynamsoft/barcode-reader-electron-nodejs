@@ -2,6 +2,7 @@ window.onload = () => {
   document.getElementById('file-selector').onchange = handleFileChange
   document.getElementById('file-select-btn').onclick = decodeFileAsync
   document.getElementById('video-capture-btn').onclick = initCamera
+  updateResultsPeriodically()
 }
 
 const services = require('./foreground-services.js')
@@ -14,8 +15,8 @@ function decodeFileAsync() {
 
 async function handleFileChange(evt) {
   const file = evt.target.files[0]
-  const results = await services.decodeFileAsync(file.path)
-  updateResults(results)
+  const results = services.decodeFileAsync(file.path)
+  // updateResults(results)
 }
 
 async function updateResults(results) {
@@ -47,6 +48,7 @@ function initCamera() {
       video.srcObject = stream
       video.onplay = (evt) => {
         window.itvId = setInterval( ()=>{ getFrame(video) }, 1000/framerate)
+        window.updateId = updateResultsPeriodically()
       }
       const container = document.getElementById('video-container')
       container.innerHTML = ''
@@ -87,6 +89,11 @@ function getFrame(videoElement) {
 }
 
 async function decodeFromFrame(frame) {
-  const res = await services.decodeBufferAsync(frame.data, frame.width, frame.height)
-  updateResults(res.data)
+  const res = services.decodeBufferAsync(frame.data, frame.width, frame.height)
+  // updateResults(res.data)
+}
+
+function updateResultsPeriodically() {
+  const buffer = services.resultBuffer
+  return setInterval(() => updateResults(buffer.results), 1000/30)
 }
