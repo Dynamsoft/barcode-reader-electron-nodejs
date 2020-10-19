@@ -1,5 +1,6 @@
 window.onload = () => {
   document.getElementById('file-selector').onchange = handleFileChange
+  document.getElementById('file-selector').onclick = (evt) => evt.target.value = ''
   document.getElementById('file-select-btn').onclick = decodeFileAsync
   document.getElementById('video-capture-btn').onclick = initCamera
   updateResultsPeriodically()
