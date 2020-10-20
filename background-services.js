@@ -6,7 +6,7 @@ const DEBUG = true
 
 function videoDecode(evt, imgData, width, height) {
   if (DEBUG)
-    console.log(`${Date.}real-time decoding for video stream: ${imgData.length/height}, ${width}`)
+    console.log(`${new Date().toLocaleString()}/real-time decoding for video stream: ${imgData.length/height}, ${width}`)
   dbr.decodeBufferAsync(imgData, width, height, width*4, barcodeTypes, (err, msg) => {
     if (err)
       console.log(err)
