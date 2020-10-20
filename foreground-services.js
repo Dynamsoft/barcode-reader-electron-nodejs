@@ -1,6 +1,6 @@
 const { ipcRenderer } = require('electron')
 
-const DEBUG = true
+const DEBUG = false
 
 ipcRenderer.setMaxListeners(30)
 
@@ -18,6 +18,9 @@ const frameBuffer = {
   decoding: false
 }
 
+/**
+ * Update frame buffer
+ */
 function setFrameBuffer(img, width, height, channel) {
   console.log('frame buffer to update')
   frameBuffer.imgData = img
@@ -36,10 +39,16 @@ function stopVideoDecode() {
   frameBuffer.decoding = false
 }
 
+/**
+ * Send message containing image data and its size to decode current buffer
+ */
 function videoDecode() {
   ipcRenderer.send('videoDecode', frameBuffer.imgData, frameBuffer.width, frameBuffer.height)
 }
 
+/**
+ * Callback when the video frame was decoded
+ */
 ipcRenderer.on('videoDecode-next', (evt, msg) => {
   updateResultBuffer(msg)
   if (frameBuffer.decoding)
@@ -49,25 +58,19 @@ ipcRenderer.on('videoDecode-next', (evt, msg) => {
 function decodeFileAsync(filepath) {
   if (DEBUG)
     console.log('sending decodeFileAsync from renderer process with args: ' + filepath)
-  // return new Promise(res => {
-    ipcRenderer.send('decodeFileAsync', filepath)
-  // })
+  ipcRenderer.send('decodeFileAsync', filepath)
 }
 
 function decodeBase64Async(base64Str) {
   if (DEBUG)
     console.log('sending decodeBase64Async from renderer process')
-  // return new Promise(res => {
-    ipcRenderer.send('decodeBase64Async', base64Str)
-  // })
+  ipcRenderer.send('decodeBase64Async', base64Str)
 }
 
 function decodeBufferAsync(imgData, width, height) {
   if (DEBUG)
     console.log('sending decodeBufferAsync from renderer process')
-  // return new Promise(res => {
-    ipcRenderer.send('decodeBufferAsync', imgData, width, height )
-  // })
+  ipcRenderer.send('decodeBufferAsync', imgData, width, height )
 }
 
 function updateResultBuffer(msg) {

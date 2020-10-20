@@ -2,7 +2,9 @@ const { ipcMain } = require('electron')
 const dbr = require('./libs/nodejs-barcode/index')
 const barcodeTypes = dbr.barcodeTypes
 
-const DEBUG = true
+const DEBUG = false
+
+ipcMain.setMaxListeners(30)
 
 function videoDecode(evt, imgData, width, height) {
   if (DEBUG)
