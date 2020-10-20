@@ -1,1 +1,7 @@
 node_modules
+
+libs/helloworld/
+
+libs/nodejs-barcode/10.1.3/
+
+libs/nodejs-barcode/bin/

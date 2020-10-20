@@ -1,6 +1,6 @@
 const { ipcRenderer } = require('electron')
 
-const DEBUG = false
+const DEBUG = true
 
 ipcRenderer.setMaxListeners(30)
 
@@ -8,6 +8,43 @@ const resultBuffer = {
   lastUpdate: null,
   results: []
 }
+
+const frameBuffer = {
+  lastUpdate: null,
+  imgData: Uint8ClampedArray.from([]),
+  width: 0,
+  height: 0,
+  channel: 0,
+  decoding: false
+}
+
+function setFrameBuffer(img, width, height, channel) {
+  console.log('frame buffer to update')
+  frameBuffer.imgData = img
+  frameBuffer.width = width
+  frameBuffer.height = height
+  frameBuffer.channel = channel
+  frameBuffer.lastUpdate = Date.now()
+}
+
+function startVideoDecode() {
+  frameBuffer.decoding = true
+  videoDecode()
+}
+
+function stopVideoDecode() {
+  frameBuffer.decoding = false
+}
+
+function videoDecode() {
+  ipcRenderer.send('videoDecode', frameBuffer.imgData, frameBuffer.width, frameBuffer.height)
+}
+
+ipcRenderer.on('videoDecode-next', (evt, msg) => {
+  updateResultBuffer(msg)
+  if (frameBuffer.decoding)
+    videoDecode()
+})
 
 function decodeFileAsync(filepath) {
   if (DEBUG)
@@ -54,5 +91,8 @@ ipcRenderer.on('decodeBase64Async-done', (evt, msg) => {
     decodeFileAsync,
     decodeBase64Async,
     decodeBufferAsync,
+    setFrameBuffer,
+    startVideoDecode,
+    stopVideoDecode,
     resultBuffer
   }

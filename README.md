@@ -1,54 +1,45 @@
-# Dynamsoft Barcode Reader with Electron
+# electron-quick-start
 
-## Introduction
+**Clone and run for a quick way to see Electron in action.**
 
-Dynamsoft Barcode Reader with Electron (dbr-electron) is a cross-platform barcode reader application built with Electron.
+This is a minimal Electron application based on the [Quick Start Guide](https://electronjs.org/docs/tutorial/quick-start) within the Electron documentation.
 
-Dynamic Barcode Reader is an 1D & 2D barcode decoding SDKs for web, desktop (Windows, macOS, Linux) and mobile (iOS, Android). It has industry-leading performance and professional technicians supports. For more details, refer [Dynamic Barcode Reader - Homepage](https://www.dynamsoft.com/Products/Dynamic-Barcode-Reader.aspx). You can get 30-day trial license to evaluate the SDK from [here](https://www.dynamsoft.com/customer/license/trialLicense).
+**Use this app along with the [Electron API Demos](https://electronjs.org/#get-started) app for API code examples to help you get started.**
 
-## Environment
+A basic Electron application needs just these files:
 
-```
-electron: 10.1.3
-Dynamsoft Barcode Reader: 7.6.0
-```
+- `package.json` - Points to the app's main file and lists its details and dependencies.
+- `main.js` - Starts the app and creates a browser window to render HTML. This is the app's **main process**.
+- `index.html` - A web page to render. This is the app's **renderer process**.
 
-Besides, a **C++ compiler** (GCC or others) is required. The **node-gyp** is required.
+You can learn more about each of these components within the [Quick Start Guide](https://electronjs.org/docs/tutorial/quick-start).
 
-> For developers from mainland China, try to specify the registry to taobao mirror [https://registry.npm.taobao.org](https://registry.npm.taobao.org) if encountered any slow connection issue.
+## To Use
 
-## Installation
-
-### Install packages
-
-Run `npm install` from the project root directory. It would install all the dependencies, including electron.
-
-### Build the Dynamsoft Barcode Reader
-
-Linux & macOS:
+To clone and run this repository you'll need [Git](https://git-scm.com) and [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)) installed on your computer. From your command line:
 
 ```bash
-cd libs/nodejs-barcode
-../../node_modules/.bin/electron-rebuild
-```
-
-Windows:
-
-```cmd
-cd .\libs\nodejs-barcode
-..\..\node_modules\.bin\electron-rebuild
-```
-
-## Launching
-
-```bash
+# Clone this repository
+git clone https://github.com/electron/electron-quick-start
+# Go into the repository
+cd electron-quick-start
+# Install dependencies
+npm install
+# Run the app
 npm start
 ```
 
-![Running on Windows](readme-assets/windows_running.png)
+Note: If you're using Linux Bash for Windows, [see this guide](https://www.howtogeek.com/261575/how-to-run-graphical-linux-desktop-applications-from-windows-10s-bash-shell/) or use `node` from the command prompt.
 
-![Running on Linux](readme-assets/linux_running.png)
+## Resources for Learning Electron
 
-## Related Articles
+- [electronjs.org/docs](https://electronjs.org/docs) - all of Electron's documentation
+- [electronjs.org/community#boilerplates](https://electronjs.org/community#boilerplates) - sample starter apps created by the community
+- [electron/electron-quick-start](https://github.com/electron/electron-quick-start) - a very basic starter Electron app
+- [electron/simple-samples](https://github.com/electron/simple-samples) - small applications with ideas for taking them further
+- [electron/electron-api-demos](https://github.com/electron/electron-api-demos) - an Electron app that teaches you how to use Electron
+- [hokein/electron-sample-apps](https://github.com/hokein/electron-sample-apps) - small demo apps for the various Electron APIs
 
-**Work In Progress**
+## License
+
+[CC0 1.0 (Public Domain)](LICENSE.md)

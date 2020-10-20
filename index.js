@@ -1,14 +1,28 @@
 window.onload = () => {
   document.getElementById('file-selector').onchange = handleFileChange
-  document.getElementById('file-selector').onclick = (evt) => evt.target.value = ''
   document.getElementById('file-select-btn').onclick = decodeFileAsync
   document.getElementById('video-capture-btn').onclick = initCamera
-  updateResultsPeriodically()
+  document.getElementById('test-btn').onclick = decode1KTimes
+  this.updateId = updateResultsPeriodically()
 }
 
 const services = require('./foreground-services.js')
+const env = {
+  cvs: new OffscreenCanvas(640, 360)
+}
 
 var capturing = false
+
+function decode1KTimes() {
+  let counter = 0
+  var id = setInterval(() => {
+    services.decodeFileAsync('/Users/jerrycha/Code/dbr-nodejs-electron/libs/nodejs-barcode/images/test.tif')
+    counter += 1
+    if (counter === 1000) {
+      clearInterval(id)
+    }
+  }, 1000/30)
+}
 
 function decodeFileAsync() {
   document.getElementById('file-selector').click()
@@ -36,12 +50,12 @@ async function updateResults(results) {
 }
 
 function initCamera() {
-  const framerate = 5
+  const framerate = 1
   // Create video element
   const video = document.querySelector('video') || document.createElement("video")
   const navigator = window.navigator
   const stream = navigator.mediaDevices.getUserMedia({
-    video: { facingMode: 'user', width: 1280, height: 720 }
+    video: { facingMode: 'user', width: 640, height: 360 }
   })
 
   if (!capturing) {
@@ -49,22 +63,32 @@ function initCamera() {
       video.srcObject = stream
       video.onplay = (evt) => {
         window.itvId = setInterval( ()=>{ getFrame(video) }, 1000/framerate)
-        window.updateId = updateResultsPeriodically()
       }
       const container = document.getElementById('video-container')
       container.innerHTML = ''
       container.appendChild(video)
       video.play()
       capturing = true
+      services.startVideoDecode()
     })
     .catch(err => {
       console.error(err)
     })
   } else {
-    video.srcObject.getTracks().forEach(track => track.stop())
-    document.getElementById('video-container').innerHTML = ''
-    clearInterval(window.itvId)
-    capturing = false
+    stream.then(stream => {
+      stream.getTracks().forEach(track => {
+        track.stop()
+      })
+    })
+      .then((stream) => {
+        console.log(stream)
+        document.getElementById('video-container').innerHTML = ''
+        clearInterval(window.itvId)
+        video.srcObject = null
+        capturing = false
+        services.stopVideoDecode()
+      })
+    // video.srcObject.getTracks().forEach(track => track.stop())
   }
 }
 
@@ -82,7 +106,7 @@ function decodeFrameHandler(evt) {
 }
 
 function getFrame(videoElement) {
-  const cvs = new OffscreenCanvas(640, 360)
+  const cvs = env.cvs
   const ctx = cvs.getContext('2d')
   ctx.drawImage(videoElement, 0, 0, cvs.width, cvs.height)
   const imgData = ctx.getImageData(0, 0, cvs.width, cvs.height)
@@ -90,7 +114,8 @@ function getFrame(videoElement) {
 }
 
 async function decodeFromFrame(frame) {
-  const res = services.decodeBufferAsync(frame.data, frame.width, frame.height)
+  // const res = services.decodeBufferAsync(frame.data, frame.width, frame.height)
+  services.setFrameBuffer(frame.data, frame.width, frame.height, 4)
   // updateResults(res.data)
 }
 

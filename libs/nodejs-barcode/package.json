@@ -28,5 +28,8 @@
     "build": "node-gyp configure build --jobs max",
     "clean": "node-gyp clean"
   },
-  "gypfile": true
+  "gypfile": true,
+  "dependencies": {
+    "node-gyp": "^7.1.1"
+  }
 }

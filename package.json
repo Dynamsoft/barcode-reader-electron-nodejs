@@ -6,7 +6,7 @@
   "scripts": {
     "start": "electron ."
   },
-  "repository": "",
+  "repository": "https://github.com/electron/electron-quick-start",
   "keywords": [
     "Electron",
     "quick",
@@ -14,7 +14,8 @@
     "tutorial",
     "demo"
   ],
-  "author": "Dynamsoft",
+  "author": "GitHub",
+  "license": "CC0-1.0",
   "devDependencies": {
     "electron": "^10.1.3",
     "electron-rebuild": "^2.2.0"
