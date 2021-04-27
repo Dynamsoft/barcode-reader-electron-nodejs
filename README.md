@@ -1,5 +1,9 @@
 # Dynamsoft Barcode Reader with Electron
 
+## What You Should Know
+- [![](https://img.shields.io/badge/Download-Offline%20SDK-orange)](https://www.dynamsoft.com/barcode-reader/downloads)
+- [![](https://img.shields.io/badge/Get-30--day%20FREE%20Trial%20License-blue)](https://www.dynamsoft.com/customer/license/trialLicense/?product=dbr)
+
 ## Introduction
 
 Dynamsoft Barcode Reader with Electron (dbr-electron) is a cross-platform barcode reader application built with Electron.
